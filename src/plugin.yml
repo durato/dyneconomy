@@ -1,0 +1,14 @@
+name: DynEconomy
+main: hu.durato.dyneconomy.DynEconomy
+version: 1.0
+commands:
+   updatesigns:
+      description: Update signs throughout the server.
+      usage: /updatesigns
+      permission: dyneconomy.updatesigns
+      permission-message: You don't have permission!
+   decayprices:
+      description: Decay prices throughout the server.
+      usage: /decayprices
+      permission: dyneconomy.decayprices
+      permission-message: You don't have permission!
