@@ -99,6 +99,9 @@ public class MyListener implements Listener {
 			if(itemWorth == null)
 			{
 				Bukkit.getLogger().log(Level.SEVERE, "[DynEco] getting item's worth failed");
+				event.setLine(0, "§4[DynEco]");
+				event.setLine(1, "§4Can you sell");
+				event.setLine(2, "§4this item?");
 				return;
 			}
 			
