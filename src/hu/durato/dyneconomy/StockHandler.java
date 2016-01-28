@@ -202,7 +202,7 @@ public class StockHandler {
 
 		if(stockItem.supply<stockItem.lastChangeAt) // supply decreased
 		{		
-			if(stockItem.setPrice(currPrice*(1.0+2.0*stockItem.changeRatio)))
+			if(stockItem.setPrice(currPrice*(1.0+2.0*stockItem.changeRatio*this.demandCompensation(stockItem))))
 			{
 				this.putStockToConfig(stockItem);
 			}
@@ -213,7 +213,7 @@ public class StockHandler {
 		}
 		else if(stockItem.supply>stockItem.lastChangeAt) // supply increased
 		{
-			if(stockItem.setPrice(currPrice*(1.0-stockItem.changeRatio)))
+			if(stockItem.setPrice(currPrice*(1.0-stockItem.changeRatio*this.demandCompensation(stockItem))))
 			{
 				this.putStockToConfig(stockItem);
 			}
@@ -227,6 +227,23 @@ public class StockHandler {
 		Bukkit.broadcast("§5[DynEco]§7 Price changed! Item: §4" + stockItem.material.name() +"§7 Price: " + Math.round(currPrice*100)/100.0 + " -> "+newPrice, "bukkit.broadcast.user"); //TODO: publicly visible
 
 		this.updateSigns(stockItem.material, newPrice);
+	}
+
+	private double demandCompensation(StockData stockItem) {
+		//=1+(1-SQRT(ABS(diff^2-demand^2))/demand)/5
+		double diff = Math.abs(stockItem.demand-stockItem.supply);
+		double corr_raw = 1.0 + (1.0-Math.sqrt(Math.abs(diff*diff - stockItem.demand*stockItem.demand))/stockItem.demand/5.0);
+		
+		if(corr_raw>1+stockItem.changeRatio)
+		{
+			return 1.0+stockItem.changeRatio;
+		}
+		else if(corr_raw<1.0-stockItem.changeRatio)
+		{
+			return 1.0-stockItem.changeRatio;
+		}
+		
+		return corr_raw;
 	}
 
 	private void updateSigns(Material material, double newPrice)

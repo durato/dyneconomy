@@ -49,7 +49,7 @@ public class DynEconomy extends JavaPlugin{
 		
 		if(!dynEconomy.exists())
 	    {
-	        config.addDefault("settings.buysellratio", 0.9d);
+	        config.addDefault("settings.buysellratio", 0.8d);
 	        config.options().copyDefaults(true);
 	        saveConfig();
 	    }
