@@ -13,3 +13,26 @@ commands:
       permission: dyneconomy.decayprices
       permission-message: You don't have permission!
 depend: [Essentials]
+permissions:
+   dyneconomy.*:
+      description: Gives access to all dyneco permissions
+      children:
+         dyneconomy.sign.create: true
+         dyneconomy.sign.use: true
+         dyneconomy.sign.buy: true
+         dyneconomy.sign.sell: true
+   dyneconomy.sign.create:
+      description: Allows you to create a dyneco sign
+      default: op
+   dyneconomy.sign.use:
+      description: Allows you to use a dyneco sign
+      default: true
+      children:
+         dyneconomy.sign.buy: true
+         dyneconomy.sign.sell: true
+   dyneconomy.sign.buy:
+      description: Allows you to buy with a dyneco sign
+      default: true
+   dyneconomy.sign.sell:
+      description: Allows you to sell with a dyneco sign
+      default: true
