@@ -12,7 +12,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 
@@ -29,12 +28,6 @@ public class MyListener implements Listener {
 	public MyListener(StockHandler stockHandler, FileConfiguration conf) {
 		this.stockHandler = stockHandler;
 		this.config = conf;
-	}
-
-	@EventHandler
-	public void onPlayerJoin(PlayerJoinEvent event)
-	{
-		Bukkit.broadcastMessage("DynEconomy greets you, " + event.getPlayer().getDisplayName() + "!");
 	}
 	
 	@EventHandler

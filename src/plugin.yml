@@ -12,3 +12,4 @@ commands:
       usage: /decayprices
       permission: dyneconomy.decayprices
       permission-message: You don't have permission!
+depend: [Essentials]
