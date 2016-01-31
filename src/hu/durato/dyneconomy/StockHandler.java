@@ -413,8 +413,16 @@ public class StockHandler {
 						amount = newAmount;
 					}
 				}
+				
+				BigDecimal price = DynEconomy.worth.getPrice(new ItemStack(mat));
+				
+				if(price == null)
+				{
+					Bukkit.getLogger().log(Level.SEVERE, "[DynEco] StockHandler, updatesigns: price was null.");
+					continue;
+				}
 
-				double buyPrice = DynEconomy.worth.getPrice(new ItemStack(mat)).doubleValue();
+				double buyPrice = price.doubleValue();
 				double sellPrice = buyPrice * config.getDouble("settings.buysellratio");
 
 				int x = Integer.parseInt(xyzStr[0]);
